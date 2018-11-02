@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <corechange>
+        <title>mimetex.linux does not work on wheezy</title>
+        <files>
+            <file>filter/tex/mimetex.linux</file>
+        </files>
+        <commits>
+            <commit>d9a18d43f3f</commit>
+        </commits>
+        <description><![CDATA[
+The file mimetex.linux is a binary and had to be compiled for wheezy
+]]></description>
+    </corechange>
+</root>
+

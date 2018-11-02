@@ -1,0 +1,39 @@
+<?php
+
+//Die folgende Zeile muss in die config.php eingefuegt werden.
+// if(file_exists(dirname(__FILE__).'/.eledia_config')){
+//     require_once(dirname(__FILE__).'/.eledia_config');
+// }
+//natuerlich ohne Kommentar ;)
+
+
+// Disable the Available update notifications
+$CFG->disableupdatenotifications = true;
+$CFG->updateminmaturity = 0;
+$CFG->updatenotifybuilds = 0;
+//
+// Disable the Automatic updates deployment
+$CFG->disableupdateautodeploy = true;
+//
+// Disable the On-click add-on installation
+$CFG->disableonclickaddoninstall = true;
+
+// Some urls to be prevented to call
+$checkurl = parse_url($_SERVER['PHP_SELF']);
+// Prevent performance-test (admin/cache/testperformance.php)
+if (strstr($checkurl['path'], '/cache/testperformance.php')) {
+    unset($_POST['count']);
+    unset($_GET['count']);
+}
+// Prevent performance-test (admin/tool/generator)
+if (strstr($checkurl['path'], '/admin/tool/generator')) {
+    $CFG->debug = 0;
+}
+
+// Prevent deleting of plugin directories
+if (strstr($checkurl['path'], '/admin/plugins.php')) {
+    unset($_POST['delete']);
+    unset($_GET['delete']);
+}
+
+$CFG->forced_plugin_settings['block_configurable_reports'] = array('sqlsecurity' => 1);
